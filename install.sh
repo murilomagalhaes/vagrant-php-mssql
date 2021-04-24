@@ -20,7 +20,7 @@ apt install -y apache2
 a2enmod rewrite
 
 #Add Ondrej PPA Repo
-apt-add-repository ppa:ondrej/php
+apt-add-repository -y ppa:ondrej/php
 apt update
 
 # Install PHP 7.4

@@ -4,3 +4,5 @@
 
 apps/*
 !apps/.gitkeep
+
+*.box
