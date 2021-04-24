@@ -47,7 +47,9 @@ You can access them on your host machine via the ip `192.168.33.20`
 - Connecting via HeidiSQL can be problematic. I couldn't make it work.
 
 - If you're having problems connecting with the box on Windows 10 running `vagrant ssh`,
-try to disable Windows 10's default ssh client. (This can be usually done under `Settings > Apps > Additional Resources`)    
+try to disable Windows 10's default ssh client. (This can be usually done under `Settings > Apps > Additional Resources`) 
+
+- You can change the ammount of CPUs and RAM by changing it on the VagrantFile. By default, it is set to 1 CPU and 2GB.
 
 
 
