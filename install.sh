@@ -19,78 +19,53 @@ apt install -y apache2
 # Enable Apache Mods
 a2enmod rewrite
 
-#Add Ondrej PPA Repo
-apt-add-repository -y ppa:ondrej/php
-apt update
-
-# Install PHP 7.4
-apt install -y php7.4
+# Install PHP
+apt install -y php
 
 # PHP Apache Mod
-apt install -y libapache2-mod-php7.4
+apt install -y libapache2-mod-php
 
 # Restart Apache
 service apache2 restart
 
 # Install PHP Mods for working with most MVC frameworks
-apt install -y php7.4-common
-apt install -y php7.4-mcrypt
-apt install -y php7.4-zip
-apt install -y php7.4-dev
-apt install -y php7.4-json
-apt install -y php7.4-xml
-apt install -y php7.4-curl
-apt install -y php7.4-intl
-apt install -y php7.4-mbstring
-apt install -y php7.4-bcmath
+apt install -y php-common
+apt install -y php-mcrypt
+apt install -y php-zip
+apt install -y php-dev
+apt install -y php-json
+apt install -y php-xml
+apt install -y php-curl
+apt install -y php-intl
+apt install -y php-mbstring
+apt install -y php-bcmath
 
 # Install PHP Composer (Latest)
 curl -Ss https://getcomposer.org/installer | php
 mv composer.phar /usr/bin/composer
 
-# Install NodeJS (14x)
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-apt update
+# Install NodeJS
 apt install -y nodejs
 apt install -y npm
 
-# Install Pre-requisites for MSSQL Server PHP Drivers
-curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
-apt-update
-ACCEPT_EULA=Y apt-get install -y msodbcsql17
-ACCEPT_EULA=Y apt-get install -y mssql-tools
-echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
-source ~/.bashrc
-apt install -y unixodbc-dev
-
-# Install MSSQL Server PHP Drivers
-pecl install sqlsrv
-pecl install pdo_sqlsrv
-printf "; priority=20\nextension=sqlsrv.so\n" > /etc/php/7.4/mods-available/sqlsrv.ini
-printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /etc/php/7.4/mods-available/pdo_sqlsrv.ini
-phpenmod -v 7.4 sqlsrv pdo_sqlsrv
 
 ###################################################
 ### MSSQL Server Installation #####################
 ### Special thanks to https://github.com/mloskot ##
 ###################################################
 
-# Ensure hostname is recognised
-sed -i "s/^127\.0\.0\.1.*/127.0.0.1 localhost $HOSTNAME/g" /etc/hosts
-
-# Ubuntu 16.04 does not deliver add-apt-repository by default
-apt-get -y -qq install curl software-properties-common
 
 # Pre-installation
 curl -s -S --retry 3 https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 
-## Repository Microsoft SQL Server 2019
-add-apt-repository "$(curl -s -S --retry 3 https://packages.microsoft.com/config/ubuntu/16.04/mssql-server-2019.list)"
+# Repository Microsoft SQL Server 2019
+add-apt-repository "$(curl -s -S --retry 3 https://packages.microsoft.com/config/ubuntu/20.04/mssql-server-2019.list)"
 
-## Repository SQL Server command-line tools
-add-apt-repository "$(curl -s -S --retry 3 https://packages.microsoft.com/config/ubuntu/16.04/prod.list)"
+# Repository SQL Server command-line tools
+add-apt-repository "$(curl -s -S --retry 3 https://packages.microsoft.com/config/ubuntu/20.04/prod.list)"
+
 apt update
+
 apt install -y mssql-server
 apt install -y mssql-tools
 
@@ -111,7 +86,21 @@ echo "SQLServer: adding /opt/mssql-tools/bin to PATH in ~/.bashrc and ~/.bash_pr
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 export PATH="$PATH:/opt/mssql-tools/bin"
-runuser -l vagrant -c  "export PATH="$PATH:/opt/mssql-tools/bin""
+
+# Install Pre-requisites for MSSQL Server PHP Drivers
+ACCEPT_EULA=Y apt-get install -y msodbcsql17
+ACCEPT_EULA=Y apt-get install -y mssql-tools
+echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+source ~/.bashrc
+apt install -y unixodbc-dev
+
+# Install MSSQL Server PHP Drivers
+pecl install sqlsrv
+pecl install pdo_sqlsrv
+printf "; priority=20\nextension=sqlsrv.so\n" > /etc/php/7.4/mods-available/sqlsrv.ini
+printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /etc/php/7.4/mods-available/pdo_sqlsrv.ini
+
+phpenmod -v 7.4 sqlsrv pdo_sqlsrv
 
 # Clean up
 apt -y autoremove
