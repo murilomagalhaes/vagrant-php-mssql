@@ -1,17 +1,17 @@
 #  VagrantBox with PHP, Apache, and Microsoft SQL Server.
 
 This is a complete development environment for working with PHP and MS SQL Server. 
-**Based on Ubuntu 16.04 (Xenial)**  🐧
+**Based on Ubuntu 20.04 (Focal)**  🐧
 
 
 
 ## Provisions
 **This Box comes bundled with the following goodies**
-- PHP 7.4 (With common mods to work with modern MVC Frameworks, and the MS SQL Server Drivers)
+- PHP 7.4.X (With common mods to work with modern MVC Frameworks, and the MS SQL Server Drivers)
 - Composer (Latest Ver.)
 - Apache 2 (With mod_rewrite enabled)
 - Git
-- NodeJS (14.x)
+- NodeJS (10.x)
 - Microsoft SQL Server 2019 (Dev. Edition)
 
 ## Requirements
@@ -35,7 +35,7 @@ This is a complete development environment for working with PHP and MS SQL Serve
 
 **Apache**
 
-The Default apache public directory `/var/www/html` is synced to the `apps` directory on the box's root. That's where your app(s) go! 
+The Default apache public directory `/var/www/` is synced to the `apps` directory on the box's root. That's where your app(s) go! 
 
 You can access them on your host machine via the ip `192.168.33.20`
 
