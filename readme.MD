@@ -50,6 +50,3 @@ You can access them on your host machine via the ip `192.168.33.20`
 try to disable Windows 10's default ssh client. (This can be usually done under `Settings > Apps > Additional Resources`) 
 
 - You can change the ammount of CPUs and RAM by changing it on the VagrantFile. By default, it is set to 1 CPU and 2GB.
-
-
-
