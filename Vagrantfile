@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
   #config.vm.network "public_network"
 
   # Synced Folder
-  config.vm.synced_folder "./apps", "/var/www"
+  config.vm.synced_folder "./apps", "/var/www/"
 
   # VBox Settings
   config.vm.provider "virtualbox" do |vb|
