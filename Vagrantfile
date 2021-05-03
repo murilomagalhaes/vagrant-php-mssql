@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vb|
  
     # Customize the amount of RAM and CPU
-    vb.memory = 2048
+    vb.memory = 3072
     vb.cpus = 2
 
   end
