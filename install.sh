@@ -105,3 +105,6 @@ phpenmod -v 7.4 sqlsrv pdo_sqlsrv
 # Clean up
 apt -y autoremove
 apt -y clean
+
+# Disable Sleep
+systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
